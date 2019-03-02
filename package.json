@@ -1,11 +1,14 @@
 {
-  "name": "fapte-bune",
+  "name": "faptebune-v2",
   "version": "1.0.0",
   "description": "A donations platform for health and social-care",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "server": "nodemon index.js"
+    "server": "nodemon index.js",
+    "admin-install": "npm install --prefix admin",
+    "admin": "npm start --prefix admin",
+    "dev": "concurrently \"npm run server\" \"npm run admin\""
   },
   "repository": {
     "type": "git",
@@ -20,6 +23,7 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
+    "concurrently": "^4.1.0",
     "cors": "^2.8.5",
     "dotenv": "^6.2.0",
     "express": "^4.16.4",
