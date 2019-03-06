@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const CommentSchema = mongoose.Schema({
+const commentSchema = mongoose.Schema({
   text: String,
   created: {
     type: Date,
@@ -15,4 +15,4 @@ const CommentSchema = mongoose.Schema({
   }
 });
 
-module.exports = mongoose.model('comment', CommentSchema);
+module.exports = mongoose.model('Comment', commentSchema);

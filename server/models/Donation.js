@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const DonationSchema = mongoose.Schema({
+const donationSchema = mongoose.Schema({
   amount: Number,
   currency: {
     type: String,
@@ -13,10 +13,10 @@ const DonationSchema = mongoose.Schema({
   issuedBy: {
     id: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'user'
+      ref: 'User'
     },
     username: String
   }
 });
 
-module.exports = mongoose.model('donation', DonationSchema);
+module.exports = mongoose.model('Donation', donationSchema);

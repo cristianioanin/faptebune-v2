@@ -4,7 +4,10 @@ const express = require('express');
 const router = express.Router();
 const passport = require('passport');
 const NGO = require('../models/NGO');
-const { allowIfAdmin, allowNGOEditing } = require('../helpers/routesHelpers');
+const {
+  allowIfAdmin,
+  allowNGOEditing
+} = require('../helpers/routesHelpers');
 
 const NodeGeocoder = require('node-geocoder');
 const options = {
@@ -28,8 +31,15 @@ router.get('/', (req, res) => {
 });
 
 // CREATE Route
-router.post('/', passport.authenticate('jwt', { session: false }), allowIfAdmin, (req, res) => {
-  const { name, logo, description, location } = req.body;
+router.post('/', passport.authenticate('jwt', {
+  session: false
+}), allowIfAdmin, (req, res) => {
+  const {
+    name,
+    logo,
+    description,
+    location
+  } = req.body;
   const author = {
     id: req.user._id
   }
@@ -43,7 +53,15 @@ router.post('/', passport.authenticate('jwt', { session: false }), allowIfAdmin,
     const lat = data[0].latitude;
     const lng = data[0].longitude;
     const location = data[0].formattedAddress;
-    const newNGO = { name, logo, location, lat, lng, description, author };
+    const newNGO = {
+      name,
+      logo,
+      location,
+      lat,
+      lng,
+      description,
+      author
+    };
 
     NGO.create(newNGO, (err, ngoRecord) => {
       if (err) {
@@ -57,7 +75,7 @@ router.post('/', passport.authenticate('jwt', { session: false }), allowIfAdmin,
 
 // SHOW Route
 router.get('/:id', (req, res) => {
-  NGO.findById(req.params.id).populate('comments').exec((err, ngoRecord) => {
+  NGO.findById(req.params.id).populate('comments donations author').exec((err, ngoRecord) => {
     if (err || ngoRecord === null) {
       res.status(400).json({
         error: err.message
@@ -69,9 +87,16 @@ router.get('/:id', (req, res) => {
 });
 
 // UPDATE Route
-router.put('/:id', passport.authenticate('jwt', { session: false }), allowNGOEditing, (req, res) => {
+router.put('/:id', passport.authenticate('jwt', {
+  session: false
+}), allowNGOEditing, (req, res) => {
 
-  const { name, logo, description, location } = req.body;
+  const {
+    name,
+    logo,
+    description,
+    location
+  } = req.body;
 
   geocoder.geocode(location, (err, data) => {
     if (err || !data.length) {
@@ -83,7 +108,14 @@ router.put('/:id', passport.authenticate('jwt', { session: false }), allowNGOEdi
     const lat = data[0].latitude;
     const lng = data[0].longitude;
     const location = data[0].formattedAddress;
-    const newNGOData = { name, logo, location, lat, lng, description };
+    const newNGOData = {
+      name,
+      logo,
+      location,
+      lat,
+      lng,
+      description
+    };
 
     NGO.findByIdAndUpdate(req.params.id, newNGOData, (err, oldRecord) => {
       if (err) {
@@ -96,7 +128,9 @@ router.put('/:id', passport.authenticate('jwt', { session: false }), allowNGOEdi
 });
 
 // DESTROY Route
-router.delete('/:id', passport.authenticate('jwt', { session: false }), allowIfAdmin, (req, res) => {
+router.delete('/:id', passport.authenticate('jwt', {
+  session: false
+}), allowIfAdmin, (req, res) => {
   NGO.findByIdAndRemove(req.params.id, (err, ngoRecord) => {
     if (err) {
       res.status(400).json(err);

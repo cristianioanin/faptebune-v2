@@ -1,11 +1,16 @@
 require('../config/passport-setup');
 
 const express = require('express');
-const router = express.Router({ mergeParams: true });
+const router = express.Router({
+  mergeParams: true
+});
 const passport = require('passport');
 const NGO = require('../models/NGO');
 const Comment = require('../models/Comment');
-const { allowCommentEditing, allowIfAdmin } = require('../helpers/routesHelpers');
+const {
+  allowCommentEditing,
+  allowIfAdmin
+} = require('../helpers/routesHelpers');
 
 // INDEX Route
 router.get('/', (req, res) => {
@@ -19,7 +24,9 @@ router.get('/', (req, res) => {
 });
 
 // CREATE Route
-router.post('/', passport.authenticate('jwt', { session: false }), (req, res) => {
+router.post('/', passport.authenticate('jwt', {
+  session: false
+}), (req, res) => {
   NGO.findById(req.params.id, (err, NGORecord) => {
     if (err || !NGORecord) {
       res.status(400).json(err);
@@ -34,9 +41,13 @@ router.post('/', passport.authenticate('jwt', { session: false }), (req, res) =>
           comment.save();
 
           NGORecord.comments.push(comment);
-          NGORecord.save();
-
-          res.status(201).json(comment);
+          NGORecord.save()
+            .then((ngo) => {
+              res.status(201).json(ngo);
+            })
+            .catch((err) => {
+              res.status(400).json(err);
+            });
         }
       });
     }
@@ -44,7 +55,9 @@ router.post('/', passport.authenticate('jwt', { session: false }), (req, res) =>
 });
 
 // UPDATE Route
-router.put('/:comment_id', passport.authenticate('jwt', { session: false }), allowCommentEditing, (req, res) => {
+router.put('/:comment_id', passport.authenticate('jwt', {
+  session: false
+}), allowCommentEditing, (req, res) => {
   Comment.findByIdAndUpdate(req.params.comment_id, req.body.comment, (err, oldComment) => {
     if (err) {
       res.status(400).json(err);
@@ -55,7 +68,9 @@ router.put('/:comment_id', passport.authenticate('jwt', { session: false }), all
 });
 
 // DESTROY Route
-router.delete('/:comment_id', passport.authenticate('jwt', { session: false }), allowIfAdmin, (req, res) => {
+router.delete('/:comment_id', passport.authenticate('jwt', {
+  session: false
+}), allowIfAdmin, (req, res) => {
   Comment.findByIdAndRemove(req.params.comment_id, (err, commentRecord) => {
     if (err) {
       res.status(400).json(err);

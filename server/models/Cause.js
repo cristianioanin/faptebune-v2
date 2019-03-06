@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const CauseSchema = new mongoose.Schema({
+const causeSchema = new mongoose.Schema({
   name: String,
   description: String,
   location: String,
@@ -13,7 +13,7 @@ const CauseSchema = new mongoose.Schema({
   author: {
     id: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'user'
+      ref: 'User'
     }
   },
   needsToRaise: Number,
@@ -21,18 +21,14 @@ const CauseSchema = new mongoose.Schema({
     type: Number,
     default: 0
   },
-  comments: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'comment'
-    }
-  ],
-  donations: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'donation'
-    }
-  ]
+  comments: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Comment'
+  }],
+  donations: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Donation'
+  }]
 });
 
-module.exports = mongoose.model('cause', CauseSchema);
+module.exports = mongoose.model('Cause', causeSchema);

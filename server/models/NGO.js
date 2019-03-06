@@ -11,28 +11,22 @@ const NGOSchema = new mongoose.Schema({
     type: Date,
     default: Date.now
   },
-  author: {
-    id: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'user'
-    }
-  },
+  author: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  }],
   amountRaised: {
     type: Number,
     default: 0
   },
-  comments: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'comment'
-    }
-  ],
-  donations: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'donation'
-    }
-  ]
+  comments: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Comment'
+  }],
+  donations: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Donation'
+  }]
 });
 
-module.exports = mongoose.model('ngo', NGOSchema);
+module.exports = mongoose.model('NGO', NGOSchema);

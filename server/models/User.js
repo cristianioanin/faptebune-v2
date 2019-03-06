@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
-const UserSchema = mongoose.Schema({
+const userSchema = mongoose.Schema({
   authMethod: {
     type: String,
     enum: ['local', 'google', 'facebook'],
@@ -58,8 +58,6 @@ const UserSchema = mongoose.Schema({
   }
 });
 
-const User = module.exports = mongoose.model('user', UserSchema);
-
 module.exports.createUser = (newUser, callback) => {
   if (newUser.authMethod !== 'local') {
     return newUser.save(callback);
@@ -80,3 +78,5 @@ module.exports.isValidPassword = (candidatePassword, hash, callback) => {
     callback(null, isMatch);
   });
 }
+
+module.exports = mongoose.model('User', userSchema);

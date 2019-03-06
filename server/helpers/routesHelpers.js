@@ -42,9 +42,13 @@ module.exports = {
   },
 
   signJWTToken: (user) => {
+    const authMethod = user.authMethod;
     return JWT.sign({
       iss: 'fapte-bune',
       sub: user.id,
+      isAdmin: user.isAdmin,
+      name: user[authMethod].username,
+      avatar: user[authMethod].avatar,
       iat: new Date().getTime(),
       exp: Math.floor(Date.now() / 1000) + (60 * 60)
     }, process.env.JWT_SECRET);

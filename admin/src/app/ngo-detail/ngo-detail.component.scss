@@ -1,0 +1,24 @@
+.controls {
+  display: flex;
+  justify-content: space-around;
+}
+
+.created {
+  &-email {
+    margin: 0 auto;
+  }
+
+  &-avatar img {
+    width: 3.125rem;
+    height: 3.125rem;
+    border-radius: 50%;
+  }
+}
+
+.donation-at-date {
+  margin: 0 auto;
+}
+
+.comment-at-date {
+  margin: 0 auto;
+}

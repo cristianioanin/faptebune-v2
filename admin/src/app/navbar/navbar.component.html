@@ -1,0 +1,23 @@
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark px-5">
+  <a class="navbar-brand" href="/admin">
+    <i class="material-icons">
+      settings
+    </i>
+  </a>
+  <div class="collapse navbar-collapse">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/admin">Home<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" (click)="authService.logout()">Logout</a>
+      </li>
+    </ul>
+    <div class="float-right">
+      <span class="text-white">
+        Salut, {{ authService.currentUser.name }}!
+      </span>
+      <img class="avatar" src="https://avatars0.githubusercontent.com/u/37038281?s=460&v=4">
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,90 @@
+$color-fb: #4267B2;
+$color-google: #d3492c;
+
+.login-form {
+  width: 340px;
+  margin: 30px auto;
+  background-color: rgba(255, 255, 255, .8);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+.login-form form {
+  margin-bottom: 15px;
+  padding: 30px;
+}
+
+.login-form h2 {
+  margin: 0 0 15px;
+}
+
+.login-form .hint-text {
+  color: #777;
+  padding-bottom: 15px;
+  text-align: center;
+}
+
+.form-control,
+.btn {
+  min-height: 38px;
+  border-radius: 2px;
+}
+
+.login-btn {
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.or-seperator {
+  margin: 20px 0 10px;
+  text-align: center;
+  border-top: 1px solid #ccc;
+}
+
+.or-seperator i {
+  padding: 0 10px;
+  background: #f7f7f7;
+  position: relative;
+  top: -11px;
+  z-index: 1;
+  color: #333;
+}
+
+.social-btn {
+  padding-right: 30px;
+  padding-left: 30px;
+}
+
+.social-btn .btn {
+  margin: 10px 0;
+  font-size: 15px;
+  text-align: center;
+  line-height: 24px;
+
+  &:first-of-type {
+    background-color: $color-fb;
+    color: #fff;
+  }
+
+  &:last-of-type {
+    background-color: $color-google;
+    color: #fff;
+  }
+}
+
+.social-btn .btn i {
+  float: left;
+  margin: 4px 15px 0 5px;
+  min-width: 15px;
+}
+
+
+.input-group-prepend {
+  display: flex;
+  align-items: center;
+
+  i {
+    color: #333;
+    font-size: 2rem;
+    padding: 0 .25rem;
+  }
+}

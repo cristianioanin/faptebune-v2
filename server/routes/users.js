@@ -58,7 +58,7 @@ router.post('/login', validateBody(schemas.authenticationSchema), passport.authe
   session: false
 }), (req, res) => {
   const token = signJWTToken(req.user);
-  res.status(200).json({
+  res.json({
     token,
     user: req.user
   });

@@ -1,0 +1,58 @@
+<div class="admin-login__view">
+  <div class="container">
+    <div class="row">
+      <!-- <div class="auth-form">
+        <h1 class="h3 mb-3 font-weight-normal text-center">Admin Login</h1>
+        <div *ngIf="invalidLogin" class="alert alert-danger">Invalid username and/or password.</div>
+        <form class="form-signin" #f="ngForm" (ngSubmit)="signIn(f.value)">
+          <label for="email" class="sr-only">Email</label>
+          <input class="form-control" type="text" name="email" ngModel placeholder="email" id="email" autofocus
+            required>
+          <label for="password" class="sr-only">Password</label>
+          <input class="form-control" type="password" name="password" ngModel placeholder="Password" id="password"
+            required>
+          <button class="btn btn-lg btn-success btn-block" type="submit">Sign In</button>
+        </form>
+      </div> -->
+
+      <div class="login-form">
+        <h2 class="text-center text-dark pt-3">Admin Login</h2>
+        <div class="text-center social-btn">
+          <button class="btn btn-block">
+            <a (click)="signInWithFB()">Sign in with <strong>Facebook</strong></a>
+          </button>
+          <button class="btn btn-block">
+            <a (click)="signInWithGoogle()">Sign in with <strong>Google</strong></a>
+          </button>
+        </div>
+        <form #f="ngForm" (ngSubmit)="signIn(f.value)">
+          <div class="or-seperator"><i>or</i></div>
+          <div class="form-group">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <i class="material-icons">
+                  alternate_email
+                </i>
+              </div>
+              <input class="form-control" type="email" name="email" ngModel placeholder="Email" id="email" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <i class="material-icons">
+                  lock_open
+                </i>
+              </div>
+              <input class="form-control" type="password" name="password" ngModel placeholder="Password" id="password"
+                required>
+            </div>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-success btn-block login-btn">Sign in</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

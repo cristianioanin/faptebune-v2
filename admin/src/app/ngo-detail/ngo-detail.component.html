@@ -1,0 +1,50 @@
+<app-navbar></app-navbar>
+<div *ngIf="currentNgo as ngo" class="container">
+  <h1 class="text-center mt-3">{{ ngo.name }}</h1>
+  <div class="controls">
+    <button mat-raised-button color="accent">Editează</button>
+    <button mat-raised-button color="warn">Șterge</button>
+  </div>
+  <article>
+    <mat-list>
+      <h3 mat-subheader>Suma strânsă până acum</h3>
+      <mat-list-item>{{ ngo.amountRaised }}</mat-list-item>
+      <mat-divider></mat-divider>
+      <h3 mat-subheader>Creat de</h3>
+      <mat-list-item>
+        <div class="created-name">{{ createdBy.name }}</div>
+        <div class="created-email">{{ createdBy.email }}</div>
+        <div class="created-avatar"> <img src="{{ createdBy.avatar }}" alt=""></div>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <h3 mat-subheader>Donații</h3>
+      <mat-list-item *ngFor="let donation of currentNgo.donations">
+        <span>
+          {{ donation.amount | number:"1.2-2" }} {{ donation.currency }}
+        </span>
+        <span class="donation-at-date">
+          {{ donation.created | date:"dd/MM/yy" }}
+        </span>
+        <span>
+          {{ donation.issuedBy.username }}
+        </span>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <h3 mat-subheader>Comentarii</h3>
+      <mat-list-item *ngFor="let comment of currentNgo.comments">
+        <span>
+          {{ comment.text | textClip:50 }}
+        </span>
+        <span class="comment-at-date">
+          {{ comment.created | date:"dd/MM/yy" }}
+        </span>
+        <span>
+          {{ comment.author.id }}
+        </span>
+      </mat-list-item>
+    </mat-list>
+  </article>
+  <aside>
+
+  </aside>
+</div>
