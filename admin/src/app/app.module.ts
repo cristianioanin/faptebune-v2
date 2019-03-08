@@ -39,13 +39,13 @@ let config = new AuthServiceConfig([
 		id: GoogleLoginProvider.PROVIDER_ID,
 		provider:
 			new GoogleLoginProvider(
-				'1048554307167-giqjgbukdk4f07dlm179ldtj03rm3l1g.apps.googleusercontent.com',
+				'***GOOGLE_CLIENT_ID***',
 				googleLoginOptions
 			)
 	},
 	{
 		id: FacebookLoginProvider.PROVIDER_ID,
-		provider: new FacebookLoginProvider('416105389143059', fbLoginOptions)
+		provider: new FacebookLoginProvider('***FACEBOOK_CLIENT_ID***', fbLoginOptions)
 	}
 ]);
 
@@ -87,7 +87,7 @@ export function provideConfig() {
 			}),
 			SocialLoginModule,
 			AgmCoreModule.forRoot({
-				apiKey: 'AIzaSyBRzW1WVTuVJ8dyC3ieTE0Qwg_vWNX9mm0'
+				apiKey: '***GOOGLE_MAPS_APIKEY***'
 			})
 		],
 	providers:
