@@ -58,6 +58,8 @@ const userSchema = mongoose.Schema({
   }
 });
 
+const User = module.exports = mongoose.model('User', userSchema);
+
 module.exports.createUser = (newUser, callback) => {
   if (newUser.authMethod !== 'local') {
     return newUser.save(callback);
@@ -78,5 +80,3 @@ module.exports.isValidPassword = (candidatePassword, hash, callback) => {
     callback(null, isMatch);
   });
 }
-
-module.exports = mongoose.model('User', userSchema);

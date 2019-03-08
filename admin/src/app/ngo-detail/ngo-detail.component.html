@@ -8,7 +8,7 @@
   <article>
     <mat-list>
       <h3 mat-subheader>Suma strânsă până acum</h3>
-      <mat-list-item>{{ ngo.amountRaised }}</mat-list-item>
+      <mat-list-item>{{ ngo.amountRaised | number:"1.2-2" }}</mat-list-item>
       <mat-divider></mat-divider>
       <h3 mat-subheader>Creat de</h3>
       <mat-list-item>
@@ -18,7 +18,7 @@
       </mat-list-item>
       <mat-divider></mat-divider>
       <h3 mat-subheader>Donații</h3>
-      <mat-list-item *ngFor="let donation of currentNgo.donations">
+      <mat-list-item *ngFor="let donation of currentNgo.donations" (click)="deleteDonation(donation._id)">
         <span>
           {{ donation.amount | number:"1.2-2" }} {{ donation.currency }}
         </span>
@@ -27,6 +27,9 @@
         </span>
         <span>
           {{ donation.issuedBy.username }}
+        </span>
+        <span>
+          <button mat-raised-button color="warn">Șterge</button>
         </span>
       </mat-list-item>
       <mat-divider></mat-divider>
@@ -43,8 +46,19 @@
         </span>
       </mat-list-item>
     </mat-list>
+    <div class="more-details">
+      <div class="description">
+        <mat-list>
+          <h3 mat-subheader>Adresa</h3>
+          <mat-list-item>{{ ngo.location }}</mat-list-item>
+          <mat-divider></mat-divider>
+          <h3 mat-subheader>Descriere</h3>
+          <mat-list-item>{{ ngo.description }}</mat-list-item>
+        </mat-list>
+      </div>
+      <div class="map">
+        <app-google-map [lat]="ngo.lat" [lng]="ngo.lng"></app-google-map>
+      </div>
+    </div>
   </article>
-  <aside>
-
-  </aside>
 </div>

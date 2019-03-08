@@ -1,8 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NgoService } from '../services/ngo.service';
 import { ActivatedRoute } from '@angular/router';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import { AuthorInterface } from '../shared/interfaces';
+import { DonationService } from '../services/donation.service';
 
 @Component({
 	selector: 'app-ngo-detail',
@@ -13,7 +14,7 @@ export class NgoDetailComponent implements OnInit {
 	currentNgo: any;
 	createdBy: AuthorInterface;
 
-	constructor(private service: NgoService, private route: ActivatedRoute) {}
+	constructor(private service: NgoService, private route: ActivatedRoute, private donationService: DonationService) {}
 
 	ngOnInit() {
 		let id: string;
@@ -30,7 +31,15 @@ export class NgoDetailComponent implements OnInit {
 				email: author[authMethod].email,
 				avatar: author[authMethod].avatar
 			};
-			console.log(this.currentNgo);
+		});
+	}
+
+	deleteDonation(id) {
+		this.donationService.delete(id).subscribe((donation) => {
+			let index = this.currentNgo.donations.findIndex((elem) => elem['_id'] === id);
+			console.log(index);
+			this.currentNgo.donations.splice(index, 1);
+			this.currentNgo.amountRaised -= donation['amount'];
 		});
 	}
 }

@@ -3,6 +3,29 @@
   justify-content: space-around;
 }
 
+mat-list-item {
+  transition-property: background-color;
+  transition-duration: .2s;
+  transition-timing-function: ease-out;
+
+  div {
+    min-width: 20vw;
+  }
+
+  span {
+    min-width: 20vw;
+  }
+
+  &:hover {
+    background-color: rgba(255, 64, 129, .1)
+  }
+}
+
+.mat-list-item {
+  height: auto !important;
+  padding: .5rem !important;
+}
+
 .created {
   &-email {
     margin: 0 auto;
@@ -21,4 +44,22 @@
 
 .comment-at-date {
   margin: 0 auto;
+}
+
+.more-details {
+  // display: flex;
+  // justify-content: space-between;
+}
+
+.description {
+  // width: 40%;
+  // height: auto;
+}
+
+.map {
+  // width: 40%;
+}
+
+article {
+  margin-bottom: 5rem;
 }

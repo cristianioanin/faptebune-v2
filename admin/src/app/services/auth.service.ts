@@ -52,6 +52,10 @@ export class AuthService {
 		return this.jwtHelper.decodeToken(this.storedToken);
 	}
 
+	getToken() {
+		return this.storedToken;
+	}
+
 	private handleError(error: HttpErrorResponse) {
 		if (error.error instanceof ErrorEvent) {
 			console.error('App error occurred:', error.error.message);

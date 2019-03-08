@@ -31,13 +31,16 @@ router.post('/', passport.authenticate('jwt', {
       res.status(400).json(err);
     } else {
       Donation.create(req.body.donation, (err, donation) => {
-        console.log(donation);
         if (err) {
           res.status(400).json(err);
         } else {
           const authMethod = req.user.authMethod;
           donation.issuedBy.id = req.user._id;
           donation.issuedBy.username = req.user[authMethod].username;
+          donation.donatedFor = {
+            entity: 'NGO',
+            id: req.params.id
+          }
           donation.save();
 
           NGORecord.donations.push(donation);

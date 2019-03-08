@@ -6,9 +6,10 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
+import {MatInputModule} from '@angular/material/input';
 
 @NgModule({
 	exports:
-		[ MatIconModule, MatTabsModule, MatTableModule, MatSortModule, MatButtonModule, MatDividerModule, MatListModule ]
+		[ MatIconModule, MatTabsModule, MatTableModule, MatSortModule, MatButtonModule, MatDividerModule, MatListModule, MatInputModule ]
 })
 export class MatComponentsModule {}

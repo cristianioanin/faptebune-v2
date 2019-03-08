@@ -2,7 +2,9 @@ require('dotenv').config();
 
 const passport = require('passport');
 const JwtStrategy = require('passport-jwt').Strategy;
-const { ExtractJwt } = require('passport-jwt');
+const {
+  ExtractJwt
+} = require('passport-jwt');
 const LocalStrategy = require('passport-local').Strategy;
 const GooglePlusTokenStrategy = require('passport-google-plus-token');
 const FacebookTokenStrategy = require('passport-facebook-token');
@@ -12,7 +14,9 @@ passport.use(new JwtStrategy({
   jwtFromRequest: ExtractJwt.fromHeader('authorization'),
   secretOrKey: process.env.JWT_SECRET
 }, (payload, done) => {
-  User.findOne({ _id: payload.sub }, (err, user) => {
+  User.findOne({
+    _id: payload.sub
+  }, (err, user) => {
     if (err) {
       return done(err, false);
     }
@@ -28,7 +32,9 @@ passport.use('googleToken', new GooglePlusTokenStrategy({
   clientID: process.env.GOOGLE_CLIENT_ID,
   clientSecret: process.env.GOOGLE_CLIENT_SECRET
 }, (accessToken, refreshToken, profile, done) => {
-  User.findOne({ 'google.id': profile.id }, (err, userRecord) => {
+  User.findOne({
+    'google.id': profile.id
+  }, (err, userRecord) => {
     if (err) {
       return done(err, false, err.message);
     }
@@ -58,7 +64,9 @@ passport.use('facebookToken', new FacebookTokenStrategy({
   clientID: process.env.FACEBOOK_CLIENT_ID,
   clientSecret: process.env.FACEBOOK_CLIENT_SECRET
 }, (accessToken, refreshToken, profile, done) => {
-  User.findOne({ 'facebook.id': profile.id }, (err, userRecord) => {
+  User.findOne({
+    'facebook.id': profile.id
+  }, (err, userRecord) => {
     if (err) {
       return done(err, false, err.message);
     }
@@ -87,11 +95,14 @@ passport.use('facebookToken', new FacebookTokenStrategy({
 passport.use(new LocalStrategy({
   usernameField: 'email'
 }, (email, password, done) => {
-  User.findOne({ 'local.email': email }, (err, user) => {
+  User.findOne({
+    'local.email': email
+  }, (err, user) => {
     if (err) {
       return done(err, false);
     }
     if (user) {
+      console.log(user);
       User.isValidPassword(password, user.local.password, (err, isMatch) => {
         if (err) {
           throw new Error(err);

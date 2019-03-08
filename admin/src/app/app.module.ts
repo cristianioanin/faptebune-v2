@@ -7,7 +7,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MatComponentsModule } from './mat-components/mat-components.module';
 import { AuthService } from './services/auth.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './shared/auth.interceptor';
+import { AgmCoreModule } from '@agm/core';
 import { NoAccessComponent } from './no-access/no-access.component';
 import { AdminComponent } from './admin/admin.component';
 import { LoginComponent } from './login/login.component';
@@ -19,6 +21,8 @@ import { GoogleLoginProvider, FacebookLoginProvider } from 'angularx-social-logi
 import { NgosComponent } from './ngos/ngos.component';
 import { NgoDetailComponent } from './ngo-detail/ngo-detail.component';
 import { TextClipPipe } from './shared/text-clip.pipe';
+import { GoogleMapComponent } from './google-map/google-map.component';
+import { NgoFormComponent } from './ngo-form/ngo-form.component';
 
 const fbLoginOptions: LoginOpt = {
 	scope: 'pages_messaging,pages_messaging_subscriptions,email,pages_show_list,manage_pages',
@@ -58,7 +62,9 @@ export function provideConfig() {
 			NavbarComponent,
 			NgosComponent,
 			NgoDetailComponent,
-			TextClipPipe
+			TextClipPipe,
+			GoogleMapComponent,
+			NgoFormComponent
 		],
 	imports:
 		[
@@ -79,7 +85,10 @@ export function provideConfig() {
 						blacklistedRoutes: [ 'http://localhost:3000/users/login', 'http://localhost:4200/auth/login' ]
 					}
 			}),
-			SocialLoginModule
+			SocialLoginModule,
+			AgmCoreModule.forRoot({
+				apiKey: 'AIzaSyBRzW1WVTuVJ8dyC3ieTE0Qwg_vWNX9mm0'
+			})
 		],
 	providers:
 		[
@@ -89,6 +98,11 @@ export function provideConfig() {
 			{
 				provide: AuthServiceConfig,
 				useFactory: provideConfig
+			},
+			{
+				provide: HTTP_INTERCEPTORS,
+				useClass: AuthInterceptor,
+				multi: true
 			}
 		],
 	bootstrap: [ AppComponent ]

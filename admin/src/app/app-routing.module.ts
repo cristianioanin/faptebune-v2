@@ -6,12 +6,14 @@ import { AdminAuthGuard } from './services/admin-auth-guard.service';
 import { AdminComponent } from './admin/admin.component';
 import { LoginComponent } from './login/login.component';
 import { NgoDetailComponent } from './ngo-detail/ngo-detail.component';
+import { NgoFormComponent } from './ngo-form/ngo-form.component';
 
 const routes: Routes = [
+	{ path: '', redirectTo: '/login', pathMatch: 'full' },
 	{ path: 'admin', component: AdminComponent, canActivate: [ AuthGuard, AdminAuthGuard ] },
 	{ path: 'login', component: LoginComponent },
-	{ path: 'ngos/:id/edit', component: NgoDetailComponent },
-	{ path: '', redirectTo: '/login', pathMatch: 'full' },
+	{ path: 'ngos/new', component: NgoFormComponent, pathMatch: 'full' },
+	{ path: 'ngos/:id', component: NgoDetailComponent },
 	{ path: 'no-access', component: NoAccessComponent, pathMatch: 'full' }
 ];
 

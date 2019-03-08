@@ -6,6 +6,13 @@ const donationSchema = mongoose.Schema({
     type: String,
     enum: ['RON', 'EUR', 'USD']
   },
+  donatedFor: {
+    entity: {
+      type: String,
+      enum: ['Cause', 'NGO']
+    },
+    id: String
+  },
   created: {
     type: Date,
     default: Date.now

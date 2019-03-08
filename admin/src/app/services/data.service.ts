@@ -33,9 +33,7 @@ export class DataService {
 	}
 
 	delete(id) {
-		return this.http
-			.delete(`${this.url}/${id}`)
-			.pipe(map((response) => response.valueOf()), catchError(this.handleError));
+		return this.http.delete(`${this.url}/${id}`).pipe(catchError(this.handleError));
 	}
 
 	private handleError(error: HttpErrorResponse) {
