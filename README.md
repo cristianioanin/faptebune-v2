@@ -25,7 +25,7 @@ Passport.js was used to implement authentication on the backend, configuring the
   
 All strategies emit a JWT token and validate it before accessing any sensitive routes. Middleware were configured for authentication and authorization: see `./server/helpers/routesHelpers.js` for more details. The client is responsible for storing the emitted token and set it in the headers `Authorization: ${retrieved-token-from-localStorage}` for any following requests.
 
-![]()
+![Landing Sign-in page for admin CMS](/screenshots/2019-03-10.png)
 
 #### REST API
 The API provides a few public, like GET methods for all records or an unique record:
@@ -33,10 +33,19 @@ The API provides a few public, like GET methods for all records or an unique rec
   * GET: `http://localhost:3000/ngos/:id`
   * GET: `http://localhost:3000/ngos/:id/donations`
   
+![List of NGO records](/screenshots/2019-03-10%20(1).png)
+  
 Other sensitive routes are authorized through the middlewares implemented on the backend, authorizing the editing or deletion if credentials provided match the records ownership or if the user has administrative privileges:
   * POST: `http://localhost:3000/ngos` (only if authenticated)
   * PUT: `http://localhost:3000/ngos/:id` (only if authenticated AND ( owner of the record || admin ))
   * DELETE: `http://localhost:3000/ngos/:id/donations/:id` (only if authenticated AND admin)
+
+Detail view on NGO record:
+
+![NGO detail view](/screenshots/2019-03-10%20(2).png)
+
+![NGO detail view - continued](/screenshots/2019-03-10%20(3).png)
+
 
 ## Code scaffolding
 
